@@ -57,34 +57,6 @@ tests/
 
 ---
 
-
-
-## 🔄 Endpoints
-
-### Criar cliente
-
-```bash
-curl -X POST http://localhost:8000/customer -H "Content-Type: application/json" -d '{"name": "João", "categories": ["vip", "recorrente"]}'
-```
-
-### Atualizar cliente
-
-```bash
-curl -X PUT http://localhost:8000/customer/1 -H "Content-Type: application/json" -d '{"name": "João Silva", "categories": ["premium"]}'
-```
-
-### Calcular parcelas
-
-```bash
-curl http://localhost:8000/payment/calculate/100/3
-```
-
-### Simular lucro com criptomoeda
-
-```bash
-curl -X POST http://localhost:8000/crypto/BTC -H "Content-Type: application/json" -d '{"quantidade": 1, "dataCompra": "2022-01-01", "dataVenda": "2022-12-31"}'
-```
-
 ## 🧪 Rodar testes
 
 ```bash

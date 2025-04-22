@@ -13,8 +13,6 @@ def get_db():
         db.close()
 
 @router.post("/")
-# bug n1 = status code
-# @router.post("/", status_code=status.HTTP_201_CREATED)
 def create_customer(data: dict, db: Session = Depends(get_db)):
     customer = Customer(name=data["name"])
     db.add(customer)

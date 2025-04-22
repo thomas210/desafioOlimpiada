@@ -26,7 +26,7 @@ Este projeto é uma API REST desenvolvida com **FastAPI** e persistência em **S
 
 ```bash
 docker build -t desafio-api .
-docker run -d -p 8000:8000 desafio-api
+docker run --rm -v .:/app -d -p 8000:8000 --name desafio-api desafio-api
 ```
 
 A API estará disponível em `http://localhost:8000`
@@ -60,9 +60,14 @@ tests/
 ## 🧪 Rodar testes
 
 ```bash
-docker run --rm desafio-api pytest
+docker run --rm -v .:/app desafio-api pytest
 ```
+ou após rodar o container
 
+```bash
+docker run --rm -v .:/app -d -p 8000:8000 --name desafio-api desafio-api (somente uma vez)
+docker exec -it desafio-api pytest
+```
 ## 🎯 Critérios de Avaliação
   
 

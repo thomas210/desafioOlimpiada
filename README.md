@@ -1,4 +1,4 @@
-![Logo](OLIMP PROGRAMAÇÃO.png)
+![Logo](OLIMP%20PROGRAMAÇÃO.png)
 
 # 🏛️ Olimpíada de Programação Nova Roma
 

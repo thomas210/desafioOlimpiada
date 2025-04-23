@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from ..database import SessionLocal
 from ..models import Customer, CustomerCategory
+from fastapi import APIRouter, Depends, status, HTTPException
 
 router = APIRouter(prefix="/customer", tags=["Customer"])
 
@@ -34,11 +34,6 @@ def update_customer(customer_id: int, data: dict, db: Session = Depends(get_db))
     customer = db.query(Customer).filter(Customer.id == customer_id).first()
     customer.name = data["name"]
     db.query(CustomerCategory).filter(CustomerCategory.customer_id == customer_id).delete()
-
-    # for cat in data.get("categories", []):
-    #     category = CustomerCategory(customer_id=customer.id, category_name=cat)
-    #     db.add(category)
-    # db.commit()
 
     return {"message": "Customer updated."}
 

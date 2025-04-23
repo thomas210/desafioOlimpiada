@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException
 import httpx
-from datetime import datetime
 from datetime import date
+from datetime import datetime
+from fastapi import APIRouter, HTTPException
 
 router = APIRouter(prefix="/crypto", tags=["Crypto"])
 

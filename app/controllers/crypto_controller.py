@@ -1,6 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 import httpx
 from datetime import datetime
+from datetime import date
 
 router = APIRouter(prefix="/crypto", tags=["Crypto"])
 
@@ -9,6 +10,13 @@ async def psgft(crypto: str, data: dict):
     quantidade = data["quantidade"]
     data_compra = datetime.fromisoformat(data["dataCompra"])
     data_venda = datetime.fromisoformat(data["dataVenda"])
+
+    if not is_float(quantidade):
+        raise HTTPException(status_code=422)
+
+    if data_venda < data_compra:
+        raise HTTPException(status_code=422)
+
     dias = abs((data_venda - data_compra).days)
 
     async with httpx.AsyncClient() as client:
@@ -29,3 +37,10 @@ async def psgft(crypto: str, data: dict):
         "lucro_percentual": round(lucro_pct, 2),
         "intervalo_em_dias": dias
     }
+
+def is_float(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False

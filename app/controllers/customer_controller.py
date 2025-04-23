@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from ..database import SessionLocal
 from ..models import Customer, CustomerCategory
@@ -12,8 +12,11 @@ def get_db():
     finally:
         db.close()
 
-@router.post("/", status_code=status.HTTP_200_OK)
+@router.post("/", status_code=201)
 def create_customer(data: dict, db: Session = Depends(get_db)):
+    if not data["name"].strip():
+       raise HTTPException(status_code=400)
+
     customer = Customer(name=data["name"])
     db.add(customer)
     db.commit()

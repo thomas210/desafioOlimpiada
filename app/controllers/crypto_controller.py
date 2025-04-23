@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException
 router = APIRouter(prefix="/crypto", tags=["Crypto"])
 
 @router.post("/{crypto}")
-async def psgft(crypto: str, data: dict):
+async def get_crypto_profit(crypto: str, data: dict):
     quantidade = data["quantidade"]
     data_compra = datetime.fromisoformat(data["dataCompra"])
     data_venda = datetime.fromisoformat(data["dataVenda"])
@@ -28,13 +28,13 @@ async def psgft(crypto: str, data: dict):
     valor_compra = avg_compra * quantidade
     valor_venda = avg_venda * quantidade
     lucro = valor_venda - valor_compra
-    lucro_pct = (lucro / valor_compra) * 100
+    lucro_percentual = (lucro / valor_compra) * 100
 
     return {
         "valor_da_compra": round(valor_compra, 2),
         "valor_da_venda": round(valor_venda, 2),
         "lucro": round(lucro, 2),
-        "lucro_percentual": round(lucro_pct, 2),
+        "lucro_percentual": round(lucro_percentual, 2),
         "intervalo_em_dias": dias
     }
 
